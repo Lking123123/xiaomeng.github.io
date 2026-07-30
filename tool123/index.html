@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="记工时">
+  <meta name="theme-color" content="#f8fafc">
+  <title>记工时账单</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/icons/icon-192.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icons/icon-192.svg">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- ========== 主日历页 ========== -->
+    <div class="page active" id="page-calendar">
+
+      <!-- 头部导航 -->
+      <div class="app-header">
+        <div class="header-nav">
+          <button class="nav-btn" id="btn-prev-month" aria-label="上个月">◀</button>
+          <span class="month-label" id="month-label">2026年 7月</span>
+          <button class="nav-btn" id="btn-next-month" aria-label="下个月">▶</button>
+        </div>
+        <button class="header-btn" id="btn-open-settings" aria-label="设置">⚙️</button>
+      </div>
+
+      <!-- 当月汇总卡片 -->
+      <div style="padding:16px 16px 0;">
+        <div class="month-summary">
+          <div class="summary-label">本月总收入</div>
+          <div class="summary-income" id="summary-income">¥ 0</div>
+          <div class="summary-details" id="summary-details">
+            <span>本月暂无记录</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 日历 -->
+      <div style="padding:0 16px;">
+        <div class="calendar-section" id="calendar-container"></div>
+      </div>
+
+      <!-- 今日快速卡片 -->
+      <div style="padding:16px;">
+        <div class="today-card" id="today-card">
+          <div class="today-info">
+            <div class="today-label">今日</div>
+            <div class="today-date" id="today-date-text">7月30日 周四</div>
+          </div>
+          <div class="today-summary">
+            <div class="today-empty">点击记录今天 →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 月度统计入口 -->
+      <div style="padding:0 16px 16px;">
+        <button class="btn btn-secondary" id="btn-open-stats" style="width:100%;">
+          📊 查看月度统计
+        </button>
+      </div>
+    </div>
+
+    <!-- ========== 记录编辑页 ========== -->
+    <div class="page" id="page-record"></div>
+
+    <!-- ========== 月度统计页 ========== -->
+    <div class="page" id="page-stats"></div>
+
+    <!-- ========== 设置页 ========== -->
+    <div class="page" id="page-settings"></div>
+
+  </div>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

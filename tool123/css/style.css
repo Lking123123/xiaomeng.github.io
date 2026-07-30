@@ -1,0 +1,895 @@
+/* ========================================
+   记工时账单 - 全局样式
+   ======================================== */
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
+  --color-primary-light: #dbeafe;
+  --color-primary-bg: #eff6ff;
+  --color-success: #16a34a;
+  --color-success-light: #dcfce7;
+  --color-warning: #ea580c;
+  --color-warning-light: #fff7ed;
+  --color-danger: #dc2626;
+  --color-danger-light: #fef2f2;
+  --color-bg: #f1f5f9;
+  --color-card: #ffffff;
+  --color-text: #1e293b;
+  --color-text-secondary: #64748b;
+  --color-text-muted: #94a3b8;
+  --color-border: #e2e8f0;
+  --color-border-light: #f1f5f9;
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.08), 0 4px 6px rgba(0,0,0,0.04);
+  --font-system: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  --font-mono: "SF Mono", "Menlo", "Consolas", monospace;
+  --transition: 0.2s ease;
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-system);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* App container - phone-like on desktop */
+.app-container {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--color-bg);
+  position: relative;
+}
+
+/* ---------- Header ---------- */
+.app-header {
+  background: var(--color-card);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--color-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.header-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.header-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: var(--color-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  font-size: 1.1rem;
+  transition: all var(--transition);
+  -webkit-tap-highlight-color: transparent;
+}
+.header-btn:active {
+  background: var(--color-border);
+  transform: scale(0.95);
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.header-nav .month-label {
+  font-size: 1rem;
+  font-weight: 600;
+  min-width: 100px;
+  text-align: center;
+}
+
+.header-nav .nav-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  transition: all var(--transition);
+}
+.header-nav .nav-btn:active {
+  background: var(--color-border);
+}
+
+/* ---------- Page System ---------- */
+.page {
+  display: none;
+  padding: 16px;
+  padding-bottom: 32px;
+}
+.page.active {
+  display: block;
+}
+
+/* ---------- Month Summary Card ---------- */
+.month-summary {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.month-summary .summary-label {
+  font-size: 0.8rem;
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+
+.month-summary .summary-income {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.month-summary .summary-details {
+  display: flex;
+  gap: 20px;
+  margin-top: 12px;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.month-summary .summary-details span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ---------- Calendar ---------- */
+.calendar-section {
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.calendar-weekdays span {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  padding: 6px 0;
+}
+
+.calendar-weekdays span:first-child,
+.calendar-weekdays span:last-child {
+  color: var(--color-danger);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calendar-cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all var(--transition);
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  color: var(--color-text);
+}
+
+.calendar-cell:active {
+  transform: scale(0.93);
+  background: var(--color-primary-light);
+}
+
+.calendar-cell.other-month {
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.calendar-cell.today {
+  background: var(--color-primary);
+  color: white;
+  font-weight: 700;
+  border-radius: 50%;
+  aspect-ratio: auto;
+  height: 38px;
+  width: 38px;
+  margin: auto;
+}
+
+.calendar-cell.today .cell-dot {
+  background: white;
+}
+
+.calendar-cell.today .cell-amount {
+  color: white;
+}
+
+.cell-day {
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.cell-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  margin-top: 2px;
+  transition: all var(--transition);
+}
+
+.calendar-cell.today .cell-dot {
+  background: rgba(255,255,255,0.7);
+}
+
+.cell-amount {
+  font-size: 0.55rem;
+  color: var(--color-success);
+  font-weight: 600;
+  line-height: 1;
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ---------- Today Quick Card ---------- */
+.today-card {
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-top: 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all var(--transition);
+  border: 1.5px solid transparent;
+}
+.today-card:active {
+  transform: scale(0.98);
+}
+.today-card.has-record {
+  border-color: var(--color-primary-light);
+}
+
+.today-card .today-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.today-card .today-label {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 2px;
+}
+
+.today-card .today-date {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.today-card .today-summary {
+  text-align: right;
+}
+
+.today-card .today-hours {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.today-card .today-income {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.today-card .today-empty {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.today-card .today-arrow {
+  color: var(--color-text-muted);
+  font-size: 1.2rem;
+}
+
+/* ---------- Record Form ---------- */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: 6px;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.form-input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-family: var(--font-system);
+  color: var(--color-text);
+  background: var(--color-card);
+  transition: all var(--transition);
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.form-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.form-input-suffix {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.form-divider {
+  border: none;
+  border-top: 1px solid var(--color-border-light);
+  margin: 20px 0;
+}
+
+/* ---------- Subsidy/Deduction Items ---------- */
+.extra-items {
+  margin-bottom: 8px;
+}
+
+.extra-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--color-bg);
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+}
+
+.extra-item .extra-label {
+  flex: 2;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.extra-item .extra-amount {
+  flex: 1;
+  text-align: right;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.extra-item .extra-amount.positive {
+  color: var(--color-success);
+}
+
+.extra-item .extra-amount.negative {
+  color: var(--color-danger);
+}
+
+.extra-item .extra-delete {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+.extra-item .extra-delete:active {
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+}
+
+.btn-add-extra {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border: 1.5px dashed var(--color-border);
+  background: transparent;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  width: 100%;
+  justify-content: center;
+  transition: all var(--transition);
+  font-family: var(--font-system);
+}
+.btn-add-extra:active {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: var(--color-primary-bg);
+}
+
+/* ---------- Total Display ---------- */
+.total-display {
+  background: var(--color-primary-bg);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.total-display .total-label {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 2px;
+}
+
+.total-display .total-amount {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: var(--font-system);
+  cursor: pointer;
+  transition: all var(--transition);
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+.btn-primary:active {
+  background: var(--color-primary-dark);
+}
+
+.btn-danger {
+  background: var(--color-card);
+  color: var(--color-danger);
+  border: 1.5px solid var(--color-danger-light);
+  width: 100%;
+}
+.btn-danger:active {
+  background: var(--color-danger-light);
+}
+
+.btn-secondary {
+  background: var(--color-bg);
+  color: var(--color-text);
+  width: 100%;
+}
+.btn-secondary:active {
+  background: var(--color-border);
+}
+
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  border-radius: var(--radius-sm);
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* ---------- Stats Page ---------- */
+.stats-hero {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.stats-hero .stats-hero-label {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+
+.stats-hero .stats-hero-amount {
+  font-size: 2.2rem;
+  font-weight: 800;
+}
+
+.stats-list {
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.stats-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.stats-item:last-child {
+  border-bottom: none;
+}
+
+.stats-item .stats-item-label {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.stats-item .stats-item-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.stats-item.total-row {
+  background: var(--color-primary-bg);
+  font-weight: 700;
+}
+
+.stats-item.total-row .stats-item-label {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.stats-item.total-row .stats-item-value {
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+.stats-divider {
+  border: none;
+  border-top: 1.5px solid var(--color-border);
+  margin: 0;
+}
+
+/* ---------- Settings Page ---------- */
+.settings-section {
+  margin-bottom: 20px;
+}
+
+.settings-section-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  padding-left: 4px;
+}
+
+.wage-card {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all var(--transition);
+  border: 1.5px solid transparent;
+}
+
+.wage-card.active-wage {
+  border-color: var(--color-primary);
+  background: var(--color-primary-bg);
+}
+
+.wage-card:active {
+  transform: scale(0.98);
+}
+
+.wage-card .wage-info {
+  flex: 1;
+}
+
+.wage-card .wage-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.wage-card .wage-rates {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.wage-card .wage-check {
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  margin-left: 8px;
+}
+
+.settings-item {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.settings-item:active {
+  transform: scale(0.98);
+}
+
+.settings-item .settings-item-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.settings-item .settings-item-arrow {
+  color: var(--color-text-muted);
+}
+
+.settings-item.danger {
+  color: var(--color-danger);
+}
+
+.settings-version {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  padding: 16px;
+}
+
+/* ---------- Modal ---------- */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  align-items: flex-end;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-sheet {
+  background: var(--color-card);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  width: 100%;
+  max-width: 430px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 20px 16px 32px;
+  animation: slideUp 0.25s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.modal-sheet .modal-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal-sheet .modal-handle {
+  width: 36px;
+  height: 4px;
+  background: var(--color-border);
+  border-radius: 2px;
+  margin: 0 auto 16px;
+}
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #1e293b;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  z-index: 300;
+  transition: transform 0.3s ease;
+  box-shadow: var(--shadow-lg);
+  pointer-events: none;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ---------- Empty State ---------- */
+.empty-state {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--color-text-muted);
+}
+
+.empty-state .empty-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.empty-state .empty-text {
+  font-size: 0.9rem;
+}
+
+/* ---------- Confirm Dialog ---------- */
+.confirm-dialog {
+  text-align: center;
+  padding: 8px 0;
+}
+
+.confirm-dialog .confirm-text {
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* ---------- Misc ---------- */
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-danger {
+  color: var(--color-danger);
+}
+
+.text-success {
+  color: var(--color-success);
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.note-input {
+  margin-top: 12px;
+}
+
+/* ---------- Responsive ---------- */
+@media (min-width: 431px) {
+  .app-container {
+    border-left: 1px solid var(--color-border);
+    border-right: 1px solid var(--color-border);
+    box-shadow: 0 0 30px rgba(0,0,0,0.05);
+  }
+
+  .modal-sheet {
+    border-radius: var(--radius-xl);
+    margin-bottom: 16px;
+    max-height: 70vh;
+  }
+
+  .modal-overlay {
+    align-items: center;
+  }
+}
+
+/* ---------- Safe Area (iPhone notch) ---------- */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .app-header {
+    padding-top: calc(12px + env(safe-area-inset-top));
+  }
+  .page {
+    padding-bottom: calc(32px + env(safe-area-inset-bottom));
+  }
+}
